@@ -52,7 +52,7 @@ const App = () => {
     }, []);
 
     /*
-    *  Adds elements to $characterElements using current "render" count
+    *  Adds new character elements to $characterElements
     */
     function addCharacters(count=1)
     {
@@ -80,7 +80,7 @@ const App = () => {
     }
 
     /*
-    *  Adds more characters when scrolled to bottom of page
+    *  Adds more characters as user scrolls to bottom of page
     */
     window.onscroll = function(ev)
     {
