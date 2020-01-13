@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Character from './components/Character/Character';
+import styled from 'styled-components';
 import axios     from "axios";
 import './App.css';
 
@@ -14,11 +15,9 @@ const App = () => {
     /*
     *  total characters
     *  current page (times new content has been loaded)
-    *  characters rendered thus far
     */
     const [charactersHandler, setCharactersHandler] = useState({
         total: 5,
-        rendered: 0,
         pageSize: 5
     });
 
@@ -39,7 +38,6 @@ const App = () => {
                //  Add total character count to handler
                setCharactersHandler({
                    total: res.data.count,
-                   rendered: charactersHandler.rendered,
                    pageSize: charactersHandler.pageSize,
                });
            })
@@ -56,26 +54,41 @@ const App = () => {
     /*
     *  Adds elements to $characterElements using current "render" count
     */
-    function addCharacters(count)
+    function addCharacters(count=1)
     {
-        //  start - ammount of currently rendered characters
-        //  end   - ammount of characters to add
-        const start = charactersHandler.rendered + 1;
-        const end   = start + count;
-
-        //  Copy characterElements to make it editable
-        const newCharacterElements = [...characterElements];
-
-        //  Loop start - end values
-        for (let i = start; i < end; i++)
+        //  Stop when all characters have loaded
+        if (characterElements.length < charactersHandler.total)
         {
-            //  Add new character to new array
-            newCharacterElements.push(<Character key={i} id={i} />);
-        }
+            //  start - ammount of currently rendered characters
+            //  end   - ammount of characters to add
+            const start = characterElements.length + 1;
+            const end   = start + count;
 
-        //  Update character elements with updated array
-        setCharacterElements(newCharacterElements);
+            //  Copy characterElements to make it editable
+            const newCharacterElements = [...characterElements];
+
+            //  Loop start - end values
+            for (let i = start; i < end; i++)
+            {
+                //  Add new character to new array
+                newCharacterElements.push(<Character key={i} id={i} />);
+            }
+
+            //  Update character elements with updated array
+            setCharacterElements(newCharacterElements);
+        }
     }
+
+    /*
+    *  Adds more characters when scrolled to bottom of page
+    */
+    window.onscroll = function(ev)
+    {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+        {
+            addCharacters();
+        }
+    };
 
 
     return (

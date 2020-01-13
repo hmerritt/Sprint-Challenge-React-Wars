@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./Character.css";
+import styled from 'styled-components';
 
 
 export default function Character({ id })
@@ -39,10 +39,41 @@ export default function Character({ id })
     }, []);
 
 
+    //  Styles
+    const Card = styled.div`
+      color: #f4f4f4;
+      padding: 60px;
+      margin: 20px 0;
+      text-align: left;
+      background-color: rgba(0,0,0, 0.8);
+    `;
+
+    const CardTitle = styled.h1`
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8em;
+      margin: 0;
+      margin-bottom: 10px;
+    `;
+
+    const CardItem = styled.div`
+      display: flex;
+      font-size: 1.2em;
+      margin: 8px 0;
+    `;
+    const CardItemTitle = styled.p`
+      width: 110px;
+      font-weight: bold;
+      margin: 0;
+    `;
+    const CardItemContent = styled.p`
+      margin: 0;
+    `;
+
+
     return (
         <>
-            <div className="character">
-                <h1 name=""> {character.name} </h1>
+            <Card id={id}>
+                <CardTitle name=""> {character.name} </CardTitle>
                 <div className="character-details">
                     {
                         //  loop character attributes
@@ -52,15 +83,16 @@ export default function Character({ id })
                             if (item !== "name")
                             {
                                 return (
-                                    <p>
-                                        {item}: <span> {character[item]} </span>
-                                    </p>
+                                    <CardItem>
+                                        <CardItemTitle>{item}: </CardItemTitle>
+                                        <CardItemContent>{character[item]}</CardItemContent>
+                                    </CardItem>
                                 )
                             }
                         })
                     }
                 </div>
-            </div>
+            </Card>
         </>
     );
 }
