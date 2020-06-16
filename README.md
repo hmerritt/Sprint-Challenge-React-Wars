@@ -24,15 +24,20 @@ In this challenge, create a web page that presents a styled list of Star Wars ch
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
-- [ ] What is React JS and what problems does it try and solve? Support your answer with concepts introduced in class and from your personal research on the web.
+- [x] What is React JS and what problems does it try and solve? Support your answer with concepts introduced in class and from your personal research on the web.
+	- React JS is a javascript library that aims to make building user interfaces easier. It does this by managing component state for you; if a state is changed or updated, it will re-render any components that the state effected. It also requires the use of components which are small segments of pages (such as a button) that can be re-used easily.
 
-- [ ] What does it mean to _think_ in react?
+- [x] What does it mean to _think_ in react?
+	- React makes you think of a page as many different self-contained components that (potentially) all have individual state. Also encourages DRY coding as components can be re-used.
 
-- [ ] Describe state.
+- [x] Describe state.
+	- State is a piece of data that can change. React manages state as when a state is changed, the component it is apart of is re-rendered.
 
-- [ ] Describe props.
+- [x] Describe props.
+	- properties is data that is passed into a component (similar to parameters in a function). Props can be any type of data; text, function, array...
 
-- [ ] What are side effects, and how do you sync effects in a React component to state or prop changes?
+- [x] What are side effects, and how do you sync effects in a React component to state or prop changes?
+	- Side effects is a function that will run whenever state changes. You can sync the effect to happen when a specific state changes by adding a `dependency` on the end. Also an empty dependency array will run after the first render of a component.
 
 ## Project Set Up
 
